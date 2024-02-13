@@ -1,53 +1,17 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: workflow
+
 on:
   push:
     branches:
-      - "**"
-
-env:
-  MYENV: "myvalue"
+      - '**'
 
 jobs:
   build:
     steps:
-      - name: loop for some secs
-        uses: docker://amazon/aws-cli
-        shell: bash
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
         run: |
-          echo "until loop"
-          i=10
-          until [ $i == 1 ]
-          do
-              echo "countdown: $i secs";
-              i=$((i-1))
-              sleep 1
-          done
-          echo "i value is $i"
-          echo "loop terminated"
-  dump-context:
-    steps:
-      - uses: docker://golang:1.20.3-alpine3.17
-        name: Dump GitHub context
-        env:
-          CLOUDBEES_CONTEXT: ${{ toJSON(cloudbees) }}
-          VARS_CONTEXT: ${{ toJSON(vars) }}
-          SECRETS_CONTEXT: ${{ toJSON(secrets) }}
-          JOB_CONTEXT: ${{ toJSON(job) }}
-          STEP_CONTEXT: ${{ toJSON(step) }}
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-        run: |
-          echo "----- VARS -----"
-          echo "$VARS_CONTEXT"
-          echo "----- SECRETS -----"
-          echo "$SECRETS_CONTEXT"
-          echo "----- CLOUDBEES -----"
-          echo "cloudbees.scm.sha: ${{ cloudbees.scm.sha }}"
-          echo "$CLOUDBEES_CONTEXT"
-          echo "----- JOB -----"
-          echo "$JOB_CONTEXT"
-          echo "----- STEP -----"
-          echo "$STEP_CONTEXT"
-          echo "----- STEPS -----"
-          echo "$STEPS_CONTEXT"
+          echo "hello world"
