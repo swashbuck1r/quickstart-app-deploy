@@ -22,7 +22,7 @@ jobs:
         uses: docker://swashbuck1r/quickstart-tools:0.0.1
         shell: bash
         run: |
-          echo "hello"
+          echo "hello2"
           set -x +e
           aws sts get-caller-identity
           
