@@ -7,11 +7,12 @@ on:
     branches:
       - '**'
 
+permissions:
+  scm-token-own: read
+  id-token: write
+
 jobs:
   deploy:
-    permissions:
-      scm-token-own: read
-      id-token: write
     steps:
       - name: Login to AWS
         uses: cloudbees-io/configure-aws-credentials@v1
