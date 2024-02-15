@@ -19,7 +19,7 @@ jobs:
         shell: bash
         run: |
           set -x +e
-          curl -n -X POST -H "Authorization: ${{ cloudbees.api.token }}" -H "Content-Type: application/json" -H "Accept: application/json" -d '{}' ${{ cloudbees.api.url }}/token-exchange/oidc-id-token/audience/sts.amazonaws.com
+          curl -n -X POST -H "Authorization: ${{ cloudbees.api.token }}" -H "Content-Type: application/json" -H "Accept: application/json" -d '{}' ${{ cloudbees.api.url }}/token-exchange/oidc-id-token/audience/sts.amazonaws.com -v
       - name: Login to AWS
         uses: cloudbees-io/configure-aws-credentials@v1
         id: aws-login
@@ -36,6 +36,7 @@ jobs:
           echo "hello5"
           set -x +e
           aws sts get-caller-identity
+          aws s3 ls
           
 
 
