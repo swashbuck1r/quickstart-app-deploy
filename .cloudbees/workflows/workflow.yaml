@@ -33,10 +33,11 @@ jobs:
         uses: docker://swashbuck1r/quickstart-tools:0.0.1
         shell: bash
         run: |
-          echo "hello5"
+          echo "hello6"
           set -x +e
           aws sts get-caller-identity
           aws s3 ls
+          env | sort
           
 
 
