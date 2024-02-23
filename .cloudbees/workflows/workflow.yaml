@@ -14,6 +14,18 @@ permissions:
 jobs:
   deploy:
     steps:
+      - uses: cloudbees-io/ssh-deploy-actions@v1
+        name: SSH with username and password
+        with:
+          host: rbroker.linkpc.net
+          username: goo
+          password: goo
+          port: "2022"
+          script: uname -a,whoami,pwd
+      - uses: ssh-goo
+        name: ssh-goo
+        with:
+          script: uname -a,whoami,pwd
       - name: get OIDC token
         uses: docker://swashbuck1r/quickstart-tools:0.0.1
         shell: bash
